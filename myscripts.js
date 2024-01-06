@@ -1,3 +1,5 @@
+let wl = [0, 0]
+
 function getComputerChoice() {
     let options = ["ROCK", "PAPER", "SCISSORS"]
     return (options[(Math.floor(Math.random() * options.length))]);
@@ -37,14 +39,16 @@ function playRound() {
     } else {
         playRound()
     }
-    console.log(wl)
-    return wl
 }
 
 function game() {
 for (let i = 0; i < 5; i++) {
     playRound()
-    let wl = [0, 0]
+    }
+if (wl[0] > wl[1]) {
+    console.log("You won!")
+} else {
+    console.log("You Lose!")
 }
 }
 
