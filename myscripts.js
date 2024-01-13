@@ -1,5 +1,9 @@
 let wl = [0, 0]
 
+const rock = document.querySelector("#ROCK");
+const paper = document.querySelector("#PAPER");
+const scissors = document.querySelector("#SCISSORS");
+
 function getComputerChoice() {
     let options = ["ROCK", "PAPER", "SCISSORS"]
     return (options[(Math.floor(Math.random() * options.length))]);
@@ -52,4 +56,6 @@ if (wl[0] > wl[1]) {
 }
 }
 
-game()
+rock.addEventListener('click', game);
+paper.addEventListener('click', game);
+scissors.addEventListener('click', game);
