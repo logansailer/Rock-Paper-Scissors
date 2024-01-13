@@ -6,7 +6,7 @@ function getComputerChoice() {
 }
 
 function getPlayerChoice() {
-    player = prompt("Please make your choice");
+    let player = prompt("Please make your choice");
     return (player.toUpperCase())
 }
 
