@@ -1,61 +1,70 @@
-let wl = [0, 0]
-
-const rock = document.querySelector("#ROCK");
-const paper = document.querySelector("#PAPER");
-const scissors = document.querySelector("#SCISSORS");
-
 function getComputerChoice() {
     let options = ["ROCK", "PAPER", "SCISSORS"]
     return (options[(Math.floor(Math.random() * options.length))]);
 }
 
-function getPlayerChoice() {
-    let player = prompt("Please make your choice");
-    return (player.toUpperCase())
-}
-
-function playRound() {
-    let cpuChoice = getComputerChoice()
-    let playerChoice = getPlayerChoice()
-
-    if (playerChoice == "ROCK" && cpuChoice == "PAPER") {
-        console.log("You Lose! Paper beats Rock")
+function playRock() {
+    let text = document.createElement("p");
+    let scoreText = document.createElement("h4")
+    let cpuChoice = getComputerChoice();
+    if (cpuChoice == "PAPER") {
+        results.appendChild(text);
+        text.textContent = "You Lose! Paper beats Rock";
         wl[1]++
-    } else if (playerChoice == "ROCK" && cpuChoice == "SCISSORS") {
-        console.log("You Win! Rock beats Scissors")
+    } else if (cpuChoice == "SCISSORS") {
+        results.appendChild(text);
+        text.textContent = "You Win! Rock beats Scissors";
         wl[0]++
-    } else if (playerChoice == "ROCK" && cpuChoice == "ROCK") {
-        playRound()
-    } else if (playerChoice == "PAPER" && cpuChoice == "SCISSORS") {
-        console.log("You Lose! Scissors beats Paper")
-        wl[1]++
-    } else if (playerChoice == "PAPER" && cpuChoice == "ROCK") {
-        console.log("You Win! Paper beats Rock")
-        wl[0]++
-    } else if (playerChoice == "PAPER" && cpuChoice == "PAPER") {
-        playRound()
-    } else if (playerChoice == "SCISSORS" && cpuChoice == "ROCK") {
-        console.log("You Lose! Rock beats Scissors")
-        wl[1]++
-    } else if (playerChoice == "SCISSORS" && cpuChoice == "PAPER") {
-        console.log("You Win! Scissors beats Paper")
-        wl[0]++
-    } else {
-        playRound()
+    } else if (cpuChoice == "ROCK") {
+        playRock()
     }
+    score.innerHTML = scoreText.textContent = "Player score " + wl[0] + ", CPU score " + wl[1];
 }
 
-function game() {
-for (let i = 0; i < 5; i++) {
-    playRound()
+function playPaper() {
+    let text = document.createElement("p");
+    let scoreText = document.createElement("h4")
+    let cpuChoice = getComputerChoice();
+    if (cpuChoice == "SCISSORS") {
+        results.appendChild(text);
+        text.textContent = "You Lose! Scissors beats Paper";
+        wl[1]++
+    } else if (cpuChoice == "ROCK") {
+        results.appendChild(text);
+        text.textContent = "You Win! Paper beats Rock";
+        wl[0]++
+    } else if (cpuChoice == "PAPER") {
+        playPaper()
     }
-if (wl[0] > wl[1]) {
-    console.log("You won!")
-} else {
-    console.log("You Lose!")
-}
+    score.innerHTML = scoreText.textContent = "Player score " + wl[0] + ", CPU score " + wl[1];
 }
 
-rock.addEventListener('click', game);
-paper.addEventListener('click', game);
-scissors.addEventListener('click', game);
+function playScissors() {
+    let text = document.createElement("p");
+    let scoreText = document.createElement("h4")
+    let cpuChoice = getComputerChoice();
+    if (cpuChoice == "ROCK") {
+        results.appendChild(text);
+        text.textContent = "You Lose! Rock beats Scissors";
+        wl[1]++
+    } else if (cpuChoice == "PAPER") {
+        results.appendChild(text);
+        text.textContent = "You Win! Scissors beats Paper";
+        wl[0]++
+    } else if (cpuChoice == "SCISSORS") {
+        playScissors()
+    }
+    score.innerHTML = scoreText.textContent = "Player score " + wl[0] + ", CPU score " + wl[1];
+}
+
+let wl = [0, 0]
+
+const rock = document.querySelector("button.ROCK");
+const paper = document.querySelector("button.PAPER");
+const scissors = document.querySelector("button.SCISSORS");
+const results = document.querySelector("#results");
+const score = document.querySelector("#score");
+
+rock.addEventListener('click', playRock);
+paper.addEventListener('click', playPaper);
+scissors.addEventListener('click', playScissors);
